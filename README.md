@@ -87,7 +87,7 @@ We welcome contributions! Follow these steps to contribute:
 
 - Click the "Fork" button at the top right of the repository page.
 
-  ## Create a new branch:
+## Create a new branch:
 
 '''git checkout -b feature/your-feature'''
   
