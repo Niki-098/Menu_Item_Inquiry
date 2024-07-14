@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Search</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .search-form {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .search-form input[type="text"] {
+            padding: 8px;
+            width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .search-form button {
+            padding: 8px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .search-results {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .results-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .results-item {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 12px;
+            margin-bottom: 12px;
+        }
+        .results-item strong {
+            font-size: 1.2em;
+        }
+        .results-item em {
+            color: #666;
+        }
+        .results-item p {
+            margin-top: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 style="text-align: center;">Restaurant Search</h2>
+        <form class="search-form" method="GET" action="{% url 'search' %}">
+            <input type="text" name="q" placeholder="Search for dishes...">
+            <button type="submit">Search</button>
+        </form>
+        
+        {% block content %}
+            {% if query %}
+                <div class="search-results">
+                    <h3>Search results for "{{ query }}"</h3>
+                    <ul class="results-list">
+                        {% for dish in results %}
+                            <li class="results-item">
+                                <strong>{{ dish.name }}</strong><br>
+                                <em>{{ dish.location }}</em><br>
+                                <p>{{ dish.full_details }}</p>
+                            </li>
+                        {% empty %}
+                            <li class="results-item">No results found.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+        {% endblock %}
+        
+    </div>
+</body>
+</html>
